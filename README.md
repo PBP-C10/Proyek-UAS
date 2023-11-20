@@ -84,13 +84,7 @@ Profile adalah modul dimana pengguna dapat melihat informasi akunnya seperti fot
   * Menghapus akun
 
 ## Role
-### **1. Admin**
-* Mengakses semua modul
-* Menghapus buku
-* Menerima request buku dari pengguna
-* Menghapus komunitas
-
-### **2. User (Authorized)**
+### **1. User (Authorized)**
 * Mengunjungi dan melakukan aksi pada Sign In & Sign Up page
 * Mengunjungi dan melakukan aksi pada Book Finds page
 * Mengunjungi dan melakukan aksi pada Book Shop page
