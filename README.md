@@ -17,7 +17,7 @@ LiteraTour memiliki fitur-fitur yang dapat memudahkan pengguna dalam membeli buk
 ## Daftar Modul
 
 ### **1. Sign In & Sign Up**
-* **Developer:** _[Nadya Aysha](https://github.com/nadyaaysha)_
+* **Developer:** [Nadya Aysha](https://github.com/nadyaaysha)
 * **Description:**
 Sign In & Sign Up adalah modul dimana pengguna dapat melakukan registrasi akun LiteraTour dan Log-In ke dalam website untuk mengakses fitur-fitur yang ditawarkan LiteraTour.
 * **Feature details:**
@@ -26,7 +26,7 @@ Sign In & Sign Up adalah modul dimana pengguna dapat melakukan registrasi akun L
   * Log out dari website
 
 ### **2. Book Finds**🔎
-* **Developer:** _[Matthew Hotmaraja Johan Turnip](https://github.com/matthewhjt)_
+* **Developer:** [Matthew Hotmaraja Johan Turnip](https://github.com/matthewhjt)
 * **Description:**
 Book Finds adalah modul dimana pengguna dapat melihat semua buku yang tersedia pada website. Selain itu, pengguna dapat membeli dan melihat review dari masing-masing buku.
 * **Feature details:**
@@ -37,7 +37,7 @@ Book Finds adalah modul dimana pengguna dapat melihat semua buku yang tersedia p
   * Menambahkan request buku yang belum ada pada website
 
 ### **3. Book Shop**🛒
-* **Developer:** _[Roger Moreno](https://github.com/SSPLASSSSH)_
+* **Developer:** [Roger Moreno](https://github.com/SSPLASSSSH)
 * **Description:**
 Book Shop adalah modul dimana pengguna dapat membeli buku dari katalog yang ada dengan menerima tiap input data dan terdapat list barang yang sudah kita order.
 * **Feature details:**
@@ -45,7 +45,7 @@ Book Shop adalah modul dimana pengguna dapat membeli buku dari katalog yang ada 
   * Membeli buku
 
 ### **4. Book Talk**💬
-* **Developer:** _[Fathi Qushoyyi Ahimsa](https://github.com/tentangfathi)_
+* **Developer:** [Fathi Qushoyyi Ahimsa](https://github.com/tentangfathi)
 * **Description:**
 Book Talk adalah modul dimana pengguna dapat memberikan ulasan terkait dengan buku. Ulasan yang diberikan memuat dua hal, rating dalam skala 1–5 dan komentar ulasan dari buku tersebut. Pengguna dapat melihat ulasan yang diberikan oleh pengguna lain. 
 * **Feature details:**
@@ -54,7 +54,7 @@ Book Talk adalah modul dimana pengguna dapat memberikan ulasan terkait dengan bu
   * Melihat ulasan buku
 
 ### **5. Book Club**🫂
-* **Developer:** _[Michelle Elizabeth Amanda Hutasoit](https://github.com/eelizabethmichelle)_
+* **Developer:** [Michelle Elizabeth Amanda Hutasoit](https://github.com/eelizabethmichelle)
 * **Description:**
 Book Club adalah modul dimana pengguna dapat membentuk komunitasnya sendiri atau bergabung dengan komunitas yang sudah ada. Pada modul ini, pengguna dapat memberikan rekomendasi buku dan melihat rekomendasi buku yang diberikan oleh anggota komunitas lainnya. Anggota komunitas juga dapat memberikan pendapat/berkomunikasi dalam format forum. 
 * **Feature details:**
@@ -66,17 +66,16 @@ Book Club adalah modul dimana pengguna dapat membentuk komunitasnya sendiri atau
   * Mengirimkan pendapat dalam format forum
 
 ### **6. My Library**📚
-* **Developer:** _[Nadya Aysha](https://github.com/nadyaaysha)_
+* **Developer:** [Nadya Aysha](https://github.com/nadyaaysha)
 * **Description:**
 My Library adalah modul dimana pengguna dapat membuat virtual library di LiteraTour dengan mengoleksi berbagai macam buku dari katalog kami. Modul ini menawarkan fitur-fitur yang akan menyimpan riwayat buku pengguna yang telah disimpan dan beli.
 * **Feature details:**
   * Menyimpan buku yang ingin beli
   * Menampilkan list buku yang telah dibeli
-  * Memorisasi quotes-quotes buku pilihan pengguna
   * Tracking progres membaca buku-buku pengguna
 
 ### **7. Profile**
-* **Developer:** _[Fathi Qushoyyi Ahimsa](https://github.com/tentangfathi)_
+* **Developer:** [Fathi Qushoyyi Ahimsa](https://github.com/tentangfathi)
 * **Description:**
 Profile adalah modul dimana pengguna dapat melihat informasi akunnya seperti foto profil, nama pengguna, nama akun (username), dan email pengguna. Pengguna juga dapat mengubah informasi akun seperti foto profil, nama pemilik akun, nama akun (username), dan email.
 * **Feature details:**
@@ -100,5 +99,12 @@ Profile adalah modul dimana pengguna dapat melihat informasi akunnya seperti fot
 * Mengunjungi dan melakukan aksi pada My Library page
 * Mengunjungi dan melakukan aksi pada Profile page
 
-## Dataset
-[https://www.kaggle.com/datasets/dylanjcastillo/7k-books-with-metadata](https://www.kaggle.com/datasets/dylanjcastillo/7k-books-with-metadata)
+## Alur Pengintegrasian Web Service
+1. Menambahkan dependensi http ke proyek yang akan digunakan untuk bertukar HTTP request.
+2. Membuat model sesuai dengan respons dari data yang berasal dari web service tersebut.
+3. Membuat http request ke web service menggunakan dependensi http.
+4. Mengkonversikan objek yang didapatkan dari web service ke model yang telah kita buat di langkah kedua.
+5. Menampilkan data yang telah dikonversi ke aplikasi dengan FutureBuilder.
+
+## Berita Acara
+[Google Sheets](https://docs.google.com/spreadsheets/d/1FIhqdwH8GYyKkmwY3EmSb9BaF_MLoWFuYX1GF3dFN_0/edit?usp=sharing)
