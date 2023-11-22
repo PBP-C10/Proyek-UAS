@@ -19,22 +19,22 @@ LiteraTour memiliki fitur-fitur yang dapat memudahkan pengguna dalam membeli buk
 ### **1. Sign In & Sign Up**
 * **Developer:** [Nadya Aysha](https://github.com/nadyaaysha)
 * **Description:**
-Sign In & Sign Up adalah modul dimana pengguna dapat melakukan registrasi akun LiteraTour dan Log-In ke dalam website untuk mengakses fitur-fitur yang ditawarkan LiteraTour.
+Sign In & Sign Up adalah modul dimana pengguna dapat melakukan registrasi akun LiteraTour dan Log-In ke dalam aplikasi untuk mengakses fitur-fitur yang ditawarkan LiteraTour.
 * **Feature details:**
   * Registrasi/pendaftaran akun
   * Sign in dengan akun yang telah dibuat
-  * Log out dari website
+  * Log out dari aplikasi
 
 ### **2. Book Finds**🔎
 * **Developer:** [Matthew Hotmaraja Johan Turnip](https://github.com/matthewhjt)
 * **Description:**
-Book Finds adalah modul dimana pengguna dapat melihat semua buku yang tersedia pada website. Selain itu, pengguna dapat membeli dan melihat review dari masing-masing buku.
+Book Finds adalah modul dimana pengguna dapat melihat semua buku yang tersedia pada aplikasi. Selain itu, pengguna dapat membeli dan melihat review dari masing-masing buku.
 * **Feature details:**
   * Katalog buku
   * Deskripsi buku
   * Melihat ulasan buku
   * Menambahkan buku ke keranjang
-  * Menambahkan request buku yang belum ada pada website
+  * Menambahkan request buku yang belum ada pada aplikasi
 
 ### **3. Book Shop**🛒
 * **Developer:** [Roger Moreno](https://github.com/SSPLASSSSH)
