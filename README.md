@@ -98,8 +98,7 @@ LiteraTour memiliki fitur-fitur yang dapat memudahkan pengguna dalam membeli buk
 
 ## Role
 
-### **1. User (Authorized)**
-
+Hanya ada satu role pengguna di aplikasi mobile LiteraTour, yaitu User (Authorized) dengan kemampuan sebagai berikut.
 - Mengunjungi dan melakukan aksi pada Sign In & Sign Up page
 - Mengunjungi dan melakukan aksi pada Book Finds page
 - Mengunjungi dan melakukan aksi pada Book Shop page
