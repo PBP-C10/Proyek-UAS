@@ -12,7 +12,7 @@ class BookfindsPage extends StatefulWidget {
 }
 
 class _BookfindsPageState extends State<BookfindsPage> {
-  Future<List<Book>> fetchProduct() async {
+  Future<List<Book>> fetchBook() async {
     final request = context.watch<CookieRequest>();
     final response = await request
         .get('https://literatour-c10-tk.pbp.cs.ui.ac.id/get-books-flutter/');
@@ -34,7 +34,7 @@ class _BookfindsPageState extends State<BookfindsPage> {
           title: const Text('Bookfinds'),
         ),
         body: FutureBuilder(
-            future: fetchProduct(),
+            future: fetchBook(),
             builder: (context, AsyncSnapshot snapshot) {
               if (snapshot.data == null) {
                 return const Center(child: CircularProgressIndicator());
@@ -79,8 +79,12 @@ class _BookfindsPageState extends State<BookfindsPage> {
                             padding: const EdgeInsets.all(20.0),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
+                                Image(
+                                  image: NetworkImage(
+                                      snapshot.data![index].fields.thumbnail),
+                                ),
                                 Text(
                                   "${snapshot.data![index].fields.title}",
                                   style: const TextStyle(
@@ -93,30 +97,19 @@ class _BookfindsPageState extends State<BookfindsPage> {
                                 Text(
                                   "${snapshot.data![index].fields.author}",
                                   style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18.0,
-                                    fontWeight: FontWeight.bold,
+                                    color: Colors.grey,
+                                    fontSize: 14.0,
                                   ),
                                 ),
                                 const SizedBox(height: 10),
                                 Text(
-                                  "${snapshot.data![index].fields.price}",
+                                  "Rp. ${snapshot.data![index].fields.price}",
                                   style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 18.0,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                const SizedBox(height: 10),
-                                Text(
-                                  "${snapshot.data![index].fields.isbn}",
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                const SizedBox(height: 10),
                               ],
                             ),
                           )));
