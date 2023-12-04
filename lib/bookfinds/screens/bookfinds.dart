@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:literatour/bookfinds/models/book.dart';
 import 'package:literatour/bookfinds/screens/bookdetails.dart';
+import 'package:literatour/bookfinds/widgets/bookcard.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
@@ -14,8 +15,8 @@ class BookfindsPage extends StatefulWidget {
 class _BookfindsPageState extends State<BookfindsPage> {
   Future<List<Book>> fetchBook() async {
     final request = context.watch<CookieRequest>();
-    final response = await request
-        .get('https://literatour-c10-tk.pbp.cs.ui.ac.id/get-books-flutter/');
+    final response = await request.get(
+        'https://matthew-hotmaraja-c10literatour.stndar.dev/get-books-flutter/');
 
     // melakukan konversi data json menjadi object Book
     List<Book> list_book = [];
@@ -61,58 +62,20 @@ class _BookfindsPageState extends State<BookfindsPage> {
                     ),
                   );
                 } else {
-                  return ListView.builder(
-                      itemCount: snapshot.data!.length,
-                      itemBuilder: (_, index) => InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => BookDetailPage(),
-                              ),
-                            );
-                          },
-                          child: Container(
-                            color: Colors.indigo,
-                            margin: const EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 12),
-                            padding: const EdgeInsets.all(20.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Image(
-                                  image: NetworkImage(
-                                      snapshot.data![index].fields.thumbnail),
-                                ),
-                                Text(
-                                  "${snapshot.data![index].fields.title}",
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                const SizedBox(height: 10),
-                                Text(
-                                  "${snapshot.data![index].fields.author}",
-                                  style: const TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 14.0,
-                                  ),
-                                ),
-                                const SizedBox(height: 10),
-                                Text(
-                                  "Rp. ${snapshot.data![index].fields.price}",
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )));
+                  return GridView.builder(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 5.0,
+                      mainAxisSpacing: 5.0,
+                    ),
+                    itemCount: snapshot.data.length,
+                    itemBuilder: (context, index) {
+                      String bookPrice =
+                          "${snapshot.data![index].fields.price ~/ 1000}.${snapshot.data![index].fields.price % 1000}";
+                      return BookCard(snapshot.data![index], bookPrice);
+                    },
+                  );
                 }
               }
             }));
