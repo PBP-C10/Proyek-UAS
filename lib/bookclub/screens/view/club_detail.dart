@@ -3,15 +3,15 @@
 import 'package:flutter/material.dart';
 import 'package:literatour/bookclub/models/bubble.dart';
 import 'package:literatour/bookclub/models/club.dart';
-import 'package:literatour/bookclub/screens/bubble_form.dart';
+import 'package:literatour/bookclub/screens/form/bubble_form.dart';
 import 'package:literatour/bookclub/screens/recommended_book_form.dart';
 import 'package:literatour/bookfinds/models/book.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
 class ClubDetailPage extends StatefulWidget {
-  Club club;
-  ClubDetailPage({Key? key, required this.club}) : super(key: key);
+  final Club club;
+  const ClubDetailPage({Key? key, required this.club}) : super(key: key);
 
   @override
   _ClubDetailPageState createState() => _ClubDetailPageState();
@@ -21,6 +21,8 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
   Map<String, String> bookIdToTitleMap = {};
   List<Book> books = [];
   List<Bubble> bubbles = [];
+  List<Club> clubs = [];
+  List<Book> recBooks = [];
   bool bookIsLoaded = false;
   bool bubbleIsLoaded = false;
 
@@ -69,6 +71,7 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
 
     for (var d in response) {
       if (d != null) {
+        print(d);
         bubbles.add(Bubble.fromJson(d));
       }
     }
@@ -93,7 +96,7 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
         child: const Text('Add Book Recommendation')));
     buttons.add(ElevatedButton(
         onPressed: () {
-          Navigator.push(
+          Navigator.pushReplacement(
               context,
               MaterialPageRoute(
                   builder: (context) => BubbleFormPage(
@@ -112,8 +115,8 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
             ),
           ],
         ),
-        body: FutureBuilder<bool>(
-            future: fetchData(request),
+        body: StreamBuilder<bool>(
+            stream: Stream.fromFuture(fetchData(request)),
             builder: (context, AsyncSnapshot snapshot) {
               return Padding(
                 padding: const EdgeInsets.all(16),
@@ -146,14 +149,40 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: bubbles
-                          .map((bubble) => Text(
-                                bubble.fields.content,
-                                style: const TextStyle(fontSize: 16),
-                              ))
-                          .toList(),
+                    ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: bubbles.length,
+                      itemBuilder: (context, index) {
+                        Bubble bubble = bubbles[index];
+                        return Card(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  bubble.fields.username,
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  '${bubble.fields.timestamp}',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                  ),
+                                ),
+                                SizedBox(height: 4),
+                                Text(
+                                  bubble.fields.content,
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
                     ),
                     const SizedBox(height: 20),
                     Row(

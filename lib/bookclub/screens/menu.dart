@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:literatour/bookclub/screens/club_form.dart';
-import 'package:literatour/bookclub/screens/list_club.dart';
+import 'package:literatour/bookclub/widgets/bookclub.dart';
 
 class BookClubPage extends StatelessWidget {
   final List<BookClubItem> items = [
@@ -51,62 +50,6 @@ class BookClubPage extends StatelessWidget {
                 }).toList(),
               ),
             ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class BookClubItem {
-  final String name;
-
-  BookClubItem(this.name);
-}
-
-class BookClubCard extends StatelessWidget {
-  final BookClubItem item;
-
-  const BookClubCard(this.item, {super.key}); // Constructor
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: Colors.indigo,
-      child: InkWell(
-        // Area responsif terhadap sentuhan
-        onTap: () {
-          // Memunculkan SnackBar ketika diklik
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(SnackBar(
-                content: Text("Kamu telah menekan tombol ${item.name}!")));
-
-          // Navigate ke route yang sesuai (tergantung jenis tombol)
-          if (item.name == "Create Club") {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const BookClubFormPage()));
-          } else if (item.name == "View Club") {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const ClubPage()));
-          }
-        },
-        child: Container(
-          // Container untuk menyimpan Icon dan Text
-          padding: const EdgeInsets.all(8),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  item.name,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(color: Colors.white),
-                ),
-              ],
-            ),
           ),
         ),
       ),

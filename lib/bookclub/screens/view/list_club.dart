@@ -1,8 +1,8 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 import 'package:literatour/bookclub/models/club.dart';
-import 'package:literatour/bookclub/screens/club_detail.dart';
+import 'package:literatour/bookclub/screens/view/club_detail.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
@@ -151,13 +151,6 @@ class _ClubPageState extends State<ClubPage> {
                             children: [
                               Text(
                                 "${snapshot.data![index].fields.name}",
-                                style: const TextStyle(
-                                  fontSize: 18.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Text(
-                                "${snapshot.data![index].fields.owner}",
                                 style: const TextStyle(
                                   fontSize: 18.0,
                                   fontWeight: FontWeight.bold,

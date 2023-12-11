@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:literatour/bookclub/models/club.dart';
-import 'package:literatour/bookclub/screens/club_detail.dart';
+import 'package:literatour/bookclub/screens/view/club_detail.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
@@ -14,16 +14,18 @@ class BubbleFormPage extends StatefulWidget {
 
 class _BubbleFormPageState extends State<BubbleFormPage> {
   final _formKey = GlobalKey<FormState>();
+  String _username = "";
   String _content = "";
 
-  Future<void> postBubble(CookieRequest request) async {
+  Future<bool> postBubble(CookieRequest request) async {
     String clubId = widget.club.pk.toString();
     final response = await request.post(
         'http://127.0.0.1:8000/book-club/${clubId}/post-bubble-flutter/', {
+      'username': _username,
       'content': _content,
     });
 
-    print(response);
+    return response["status"] == "success";
   }
 
   @override
@@ -46,6 +48,29 @@ class _BubbleFormPageState extends State<BubbleFormPage> {
         child: SingleChildScrollView(
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextFormField(
+                decoration: InputDecoration(
+                  hintText: "Username",
+                  labelText: "How Would You Like to Be Called?",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5.0),
+                  ),
+                ),
+                onChanged: (String? value) {
+                  setState(() {
+                    _username = value!;
+                  });
+                },
+                validator: (String? value) {
+                  if (value == null || value.isEmpty) {
+                    return "Username can't be empty!";
+                  }
+                  return null;
+                },
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(

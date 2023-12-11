@@ -15,6 +15,7 @@ class _BookClubFormPageState extends State<BookClubFormPage> {
   final _formKey = GlobalKey<FormState>();
   Map<String, String> _bookTitleToIdMap = {};
   String _name = "";
+  String _username = "";
   String _description = "";
   String _bubble = "";
   String? _selectedBookTitle;
@@ -52,7 +53,7 @@ class _BookClubFormPageState extends State<BookClubFormPage> {
     return books;
   }
 
-  Future<void> createClub(CookieRequest request) async {
+  Future<bool> createClub(CookieRequest request) async {
     String? selectedBookId = _selectedBookTitle != null
         ? _bookTitleToIdMap[_selectedBookTitle]
         : null;
@@ -60,10 +61,13 @@ class _BookClubFormPageState extends State<BookClubFormPage> {
     final response = await request
         .post('http://127.0.0.1:8000/book-club/create-club-flutter/', {
       'name': _name,
+      'username': 'Club Owner',
       'description': _description,
       'recommended_books': selectedBookId,
       'bubble': _bubble,
     });
+
+    return response["status"] == "success";
   }
 
   @override
