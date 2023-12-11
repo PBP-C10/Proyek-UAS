@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:literatour/bookclub/screens/bubble_form.dart';
 import 'package:literatour/bookclub/screens/club_form.dart';
 import 'package:literatour/bookclub/screens/list_club.dart';
 
 class BookClubPage extends StatelessWidget {
   final List<BookClubItem> items = [
     BookClubItem("Create Club"),
-    BookClubItem("Post Bubble"),
     BookClubItem("View Club"),
   ];
   BookClubPage({Key? key}) : super(key: key);
@@ -90,11 +88,6 @@ class BookClubCard extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                     builder: (context) => const BookClubFormPage()));
-          } else if (item.name == "Post Bubble") {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const BubbleFormPage()));
           } else if (item.name == "View Club") {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const ClubPage()));

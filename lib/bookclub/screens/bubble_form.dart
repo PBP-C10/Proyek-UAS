@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:literatour/bookclub/screens/menu.dart';
+import 'package:literatour/bookfinds/models/book.dart';
 
 class BubbleFormPage extends StatefulWidget {
   const BubbleFormPage({super.key});

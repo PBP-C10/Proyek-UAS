@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:literatour/bookclub/screens/menu.dart';
 import 'package:literatour/bookfinds/screens/bookfinds.dart';
 import 'package:flutter/material.dart';
@@ -73,8 +75,6 @@ class _LoginPageState extends State<LoginPage> {
                       'username': username,
                       'password': password,
                     });
-                print('test');
-                print(response["username"]);
                 if (request.loggedIn) {
                   String message = response['message'];
                   String uname = response['username'];

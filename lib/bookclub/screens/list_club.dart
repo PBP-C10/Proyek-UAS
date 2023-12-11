@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:literatour/bookclub/models/club.dart';
+import 'package:literatour/bookclub/screens/club_detail.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
@@ -13,7 +14,7 @@ class ClubPage extends StatefulWidget {
 }
 
 class _ClubPageState extends State<ClubPage> {
-  List<Club> clubs = []; // Define the state variable to hold the list of clubs
+  List<Club> clubs = [];
 
   Future<void> refreshClubs(CookieRequest request) async {
     var updatedClubs = await fetchClub(request);
@@ -101,10 +102,32 @@ class _ClubPageState extends State<ClubPage> {
                         if (isClubOwner) {
                           buttons.add(ElevatedButton(
                               onPressed: () async {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        ClubDetailPage(club: club),
+                                  ),
+                                );
+                              },
+                              child: const Text('Show More')));
+                          buttons.add(ElevatedButton(
+                              onPressed: () async {
                                 deleteClub(request, club.pk);
                               },
                               child: const Text('Delete')));
                         } else if (isClubMember) {
+                          buttons.add(ElevatedButton(
+                              onPressed: () async {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        ClubDetailPage(club: club),
+                                  ),
+                                );
+                              },
+                              child: const Text('Show More')));
                           buttons.add(ElevatedButton(
                               onPressed: () async {
                                 leaveClub(request, club.pk);
@@ -143,9 +166,8 @@ class _ClubPageState extends State<ClubPage> {
                               const SizedBox(height: 10),
                               Text(
                                   "${snapshot.data![index].fields.description}"),
+                              const SizedBox(height: 10),
                               Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
                                 children: buttons,
                               ),
                             ],
