@@ -106,13 +106,7 @@ class _BubbleFormPageState extends State<BubbleFormPage> {
                     if (_formKey.currentState!.validate()) {
                       postBubble(request);
                       _formKey.currentState!.reset();
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              ClubDetailPage(club: widget.club),
-                        ),
-                      );
+                      Navigator.pop(context);
                     }
                   },
                   child: const Text(

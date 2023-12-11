@@ -205,12 +205,7 @@ class _BookClubFormPageState extends State<BookClubFormPage> {
                                 createClub(request);
                                 _selectedBookTitle = null;
                                 _formKey.currentState!.reset();
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => BookClubPage(),
-                                  ),
-                                );
+                                Navigator.pop(context);
                               }
                             },
                             child: const Text(

@@ -48,7 +48,6 @@ class _RecommendedBookFormPageState extends State<RecommendedBookFormPage> {
       }
 
       isLoaded = true;
-      print(_bookTitleToIdMap);
     }
 
     return books;
@@ -64,7 +63,6 @@ class _RecommendedBookFormPageState extends State<RecommendedBookFormPage> {
         'http://127.0.0.1:8000/book-club/${clubId}/add-rec-book-flutter/', {
       'recommended_books': selectedBookId,
     });
-    print(response);
   }
 
   @override
