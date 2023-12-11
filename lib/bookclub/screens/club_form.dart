@@ -12,8 +12,8 @@ class BookClubFormPage extends StatefulWidget {
 }
 
 class _BookClubFormPageState extends State<BookClubFormPage> {
-  Map<String, String> _bookTitleToIdMap = {};
   final _formKey = GlobalKey<FormState>();
+  Map<String, String> _bookTitleToIdMap = {};
   String _name = "";
   String _description = "";
   String _bubble = "";
@@ -27,20 +27,20 @@ class _BookClubFormPageState extends State<BookClubFormPage> {
           .get('https://literatour-c10-tk.pbp.cs.ui.ac.id/get-books-flutter/');
 
       // melakukan konversi data json menjadi object Book
-      try {
-        for (var d in response) {
-          if (d != null) {
-            try {
-              books.add(Book.fromJson(d));
-            } catch (e) {
-              print("Error decoding a book entry: $e");
-              // Handle or log the error, maybe skip this entry
-            }
-          }
+      // try {
+      for (var d in response) {
+        if (d != null) {
+          // try {
+          books.add(Book.fromJson(d));
+          // } catch (e) {
+          //   print("Error decoding a book entry: $e");
+          //   // Handle or log the error, maybe skip this entry
+          // }
         }
-      } catch (e) {
-        print("Bad UTF-8 encoding found: $e");
       }
+      // } catch (e) {
+      //   print("Bad UTF-8 encoding found: $e");
+      // }
 
       for (var book in books) {
         _bookTitleToIdMap[book.fields.title] = book.pk.toString();
@@ -64,8 +64,6 @@ class _BookClubFormPageState extends State<BookClubFormPage> {
       'recommended_books': selectedBookId,
       'bubble': _bubble,
     });
-
-    print(response);
   }
 
   @override

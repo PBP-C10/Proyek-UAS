@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:literatour/bookclub/screens/menu.dart';
-import 'package:literatour/bookfinds/models/book.dart';
+import 'package:literatour/bookclub/models/club.dart';
+import 'package:literatour/bookclub/screens/club_detail.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 
 class BubbleFormPage extends StatefulWidget {
-  const BubbleFormPage({super.key});
+  final Club club;
+  const BubbleFormPage({Key? key, required this.club}) : super(key: key);
 
   @override
   State<BubbleFormPage> createState() => _BubbleFormPageState();
@@ -13,8 +16,20 @@ class _BubbleFormPageState extends State<BubbleFormPage> {
   final _formKey = GlobalKey<FormState>();
   String _content = "";
 
+  Future<void> postBubble(CookieRequest request) async {
+    String clubId = widget.club.pk.toString();
+    final response = await request.post(
+        'http://127.0.0.1:8000/book-club/${clubId}/post-bubble-flutter/', {
+      'content': _content,
+    });
+
+    print(response);
+  }
+
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
+
     return Scaffold(
       appBar: AppBar(
         title: const Center(
@@ -64,32 +79,15 @@ class _BubbleFormPageState extends State<BubbleFormPage> {
                   ),
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      showDialog(
-                        context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            title:
-                                const Text('Bubble is successfully created!'),
-                            content: SingleChildScrollView(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text('Content: $_content'),
-                                ],
-                              ),
-                            ),
-                            actions: [
-                              TextButton(
-                                child: const Text('OK'),
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                              ),
-                            ],
-                          );
-                        },
-                      );
+                      postBubble(request);
                       _formKey.currentState!.reset();
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              ClubDetailPage(club: widget.club),
+                        ),
+                      );
                     }
                   },
                   child: const Text(
