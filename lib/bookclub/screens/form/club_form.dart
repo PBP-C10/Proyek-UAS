@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:literatour/bookclub/screens/menu.dart';
 import 'package:literatour/bookfinds/models/book.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
@@ -15,7 +14,6 @@ class _BookClubFormPageState extends State<BookClubFormPage> {
   final _formKey = GlobalKey<FormState>();
   Map<String, String> _bookTitleToIdMap = {};
   String _name = "";
-  String _username = "";
   String _description = "";
   String _bubble = "";
   String? _selectedBookTitle;
@@ -24,8 +22,9 @@ class _BookClubFormPageState extends State<BookClubFormPage> {
 
   Future<List<Book>> fetchBook(CookieRequest request) async {
     if (!isLoaded) {
-      final response = await request
-          .get('https://literatour-c10-tk.pbp.cs.ui.ac.id/get-books-flutter/');
+      final response = await request.get(
+          // 'https://literatour-c10-tk.pbp.cs.ui.ac.id/get-books-flutter/',
+          'http://127.0.0.1:8000/get-books-flutter/');
 
       // melakukan konversi data json menjadi object Book
       // try {
@@ -80,6 +79,12 @@ class _BookClubFormPageState extends State<BookClubFormPage> {
               'Create Club',
             ),
           ),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.arrow_back),
+              onPressed: () => Navigator.pop(context),
+            ),
+          ],
           backgroundColor: Colors.indigo,
           foregroundColor: Colors.white,
         ),

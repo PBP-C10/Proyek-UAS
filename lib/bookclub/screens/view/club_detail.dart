@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:literatour/bookclub/models/bubble.dart';
 import 'package:literatour/bookclub/models/club.dart';
 import 'package:literatour/bookclub/screens/form/bubble_form.dart';
-import 'package:literatour/bookclub/screens/form/recommended_book_form.dart';
 import 'package:literatour/bookfinds/models/book.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
+// ignore: must_be_immutable
 class ClubDetailPage extends StatefulWidget {
-  final Club club;
-  const ClubDetailPage({Key? key, required this.club}) : super(key: key);
+  Club club;
+  ClubDetailPage({Key? key, required this.club}) : super(key: key);
 
   @override
   _ClubDetailPageState createState() => _ClubDetailPageState();
@@ -19,27 +19,52 @@ class ClubDetailPage extends StatefulWidget {
 
 class _ClubDetailPageState extends State<ClubDetailPage> {
   final _formKey = GlobalKey<FormState>();
+  List<Club> clubs = [];
   List<Book> books = [];
   List<Bubble> bubbles = [];
-  List<Club> clubs = [];
-  List<String> recBooks = [];
+  bool clubIsUpdated = false;
+  bool bookIsLoaded = false;
+  bool bubbleIsLoaded = false;
   Map<String, String> bookIdToTitleMap = {};
   Map<String, String> bookTitleToIdMap = {};
   String? _selectedBookTitle;
-  bool bookIsLoaded = false;
-  bool bubbleIsLoaded = false;
 
-  Future<bool> fetchData(CookieRequest request) async {
+  Future<void> fetchData(CookieRequest request) async {
+    await fetchClub(request);
     await fetchBook(request);
     await fetchBubble(request);
+  }
 
-    return true; // hard-coded bgt maaf
+  Future<List<Club>> fetchClub(CookieRequest request) async {
+    if (!clubIsUpdated) {
+      final response = await request.get(
+        // 'https://literatour-c10-tk.pbp.cs.ui.ac.id/book-club/get-club-json/',
+        'http://127.0.0.1:8000/book-club/get-club-flutter/',
+      );
+
+      // melakukan konversi data json menjadi object Book
+      clubs = [];
+      for (var d in response["clubs"]) {
+        if (d != null) {
+          Club club = Club.fromJson(d);
+          clubs.add(Club.fromJson(d));
+
+          if (club.pk == widget.club.pk) {
+            widget.club = club;
+          }
+        }
+      }
+      clubIsUpdated = true;
+    }
+
+    return clubs;
   }
 
   Future<List<Book>> fetchBook(CookieRequest request) async {
     if (!bookIsLoaded) {
-      final response = await request
-          .get('https://literatour-c10-tk.pbp.cs.ui.ac.id/get-books-flutter/');
+      final response = await request.get(
+          // 'https://literatour-c10-tk.pbp.cs.ui.ac.id/get-books-flutter/'
+          'http://127.0.0.1:8000/get-books-flutter/');
 
       // melakukan konversi data json menjadi object Book
       // try {
@@ -61,15 +86,9 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
         bookTitleToIdMap[book.fields.title] = book.pk.toString();
       }
 
-      for (int recBookId in widget.club.fields.recommendedBooks) {
-        print(recBookId);
-        recBooks.add(recBookId.toString());
-      }
+      bookIsLoaded = true;
     }
 
-    // bookIsLoaded = true;
-    // }
-    bookIsLoaded = true;
     return books;
   }
 
@@ -84,6 +103,7 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
           bubbles.add(Bubble.fromJson(d));
         }
       }
+
       bubbleIsLoaded = true;
     }
     return bubbles;
@@ -95,12 +115,13 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
         ? bookTitleToIdMap[_selectedBookTitle]
         : null;
 
-    recBooks.add(selectedBookId.toString());
     final response = await request.post(
         'http://127.0.0.1:8000/book-club/${clubId}/add-rec-book-flutter/', {
       'recommended_books': selectedBookId,
     });
-    print(response);
+
+    clubIsUpdated = false;
+    await fetchData(request);
   }
 
   @override
@@ -110,17 +131,7 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
     List<Widget> buttons = [];
     buttons.add(ElevatedButton(
         onPressed: () {
-          Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => RecommendedBookFormPage(
-                        club: widget.club,
-                      )));
-        },
-        child: const Text('Add Book Recommendation')));
-    buttons.add(ElevatedButton(
-        onPressed: () {
-          Navigator.pushReplacement(
+          Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) => BubbleFormPage(
@@ -139,12 +150,16 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
             ),
           ],
         ),
-        body: FutureBuilder<bool>(
+        body: FutureBuilder<void>(
             future: fetchData(request),
             builder: (context, AsyncSnapshot snapshot) {
-              return Form(
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              } else {
+                return Form(
                   key: _formKey,
-                  child: Padding(
+                  child: SingleChildScrollView(
+                      child: Padding(
                     padding: const EdgeInsets.all(16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -162,7 +177,7 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
                         ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: recBooks
+                          children: widget.club.fields.recommendedBooks
                               .map((recBookTitle) => Text(
                                     bookIdToTitleMap[recBookTitle.toString()]!,
                                     style: const TextStyle(fontSize: 16),
@@ -213,20 +228,17 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
                                   addRecBook(request);
                                   _selectedBookTitle = null;
                                   _formKey.currentState!.reset();
-                                  setState(() {});
-                                  // build(context);
-                                  // Navigator.pushReplacement(
-                                  //   context,
-                                  //   MaterialPageRoute(
-                                  //     builder: (context) => ClubDetailPage(
-                                  //       club: widget.club,
-                                  //     ),
-                                  //   ),
-                                  // );
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          ClubDetailPage(club: widget.club),
+                                    ),
+                                  );
                                 }
                               },
                               child: const Text(
-                                "Save",
+                                "Add Book Recommendation",
                                 style: TextStyle(color: Colors.white),
                               ),
                             ),
@@ -278,7 +290,9 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
                         ),
                       ],
                     ),
-                  ));
+                  )),
+                );
+              }
             }));
   }
 }
