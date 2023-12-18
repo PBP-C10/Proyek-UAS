@@ -1,5 +1,5 @@
-import 'package:literatour/bookfinds/screens/bookfinds.dart';
 import 'package:flutter/material.dart';
+import 'package:literatour/bookfinds/screens/bookfinds.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
@@ -69,7 +69,6 @@ class _LoginPageState extends State<LoginPage> {
                   'username': username,
                   'password': password,
                 });
-
                 if (request.loggedIn) {
                   String message = response['message'];
                   String uname = response['username'];
