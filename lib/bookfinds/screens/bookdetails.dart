@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:literatour/bookfinds/models/book.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:literatour/bookfinds/widgets/startRating.dart';
 
 class BookDetailPage extends StatefulWidget {
   final Book book;
@@ -32,12 +33,6 @@ class _BookDetailPageState extends State<BookDetailPage> {
                 children: [
                   Container(
                     padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.red,
-                        width: 2.0,
-                      ),
-                    ),
                     alignment: Alignment.center,
                     child: Image.network(
                       widget.book.fields.thumbnail,
@@ -49,12 +44,6 @@ class _BookDetailPageState extends State<BookDetailPage> {
                   Container(
                     padding: const EdgeInsets.all(16),
                     width: double.infinity,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.red,
-                        width: 2.0,
-                      ),
-                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -126,12 +115,6 @@ class _BookDetailPageState extends State<BookDetailPage> {
                   Container(
                     padding: const EdgeInsets.all(16),
                     width: double.infinity,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.red,
-                        width: 2.0,
-                      ),
-                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -167,12 +150,6 @@ class _BookDetailPageState extends State<BookDetailPage> {
                   Container(
                     padding: const EdgeInsets.all(16),
                     width: double.infinity,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.red,
-                        width: 2.0,
-                      ),
-                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment
                           .start, // Align the columns to the start (left)
@@ -311,14 +288,12 @@ class _BookDetailPageState extends State<BookDetailPage> {
             padding: const EdgeInsets.all(8),
             width: double.infinity,
             height: 110,
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: Colors.red,
-                width: 2,
-                // top: BorderSide(
-                //   color: Colors.black,
-                //   width: 0.5,
-                // ),
+            decoration: const BoxDecoration(
+              border: Border(
+                top: BorderSide(
+                  color: Colors.black,
+                  width: 0.5,
+                ),
               ),
             ),
             child: Column(
@@ -364,27 +339,6 @@ class _BookDetailPageState extends State<BookDetailPage> {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class StarRating extends StatelessWidget {
-  final int rating;
-  final Color color;
-
-  const StarRating(
-      {super.key, required this.rating, this.color = Colors.yellow});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: List.generate(
-        5,
-        (index) => Icon(
-          index < rating ? Icons.star : Icons.star_border,
-          color: color,
-        ),
       ),
     );
   }
