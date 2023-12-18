@@ -6,24 +6,28 @@ class BookCard extends StatelessWidget {
   final Book book;
   final String bookPrice;
 
-  const BookCard(this.book, this.bookPrice, {super.key}); // Constructor
+  const BookCard(this.book, this.bookPrice, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Material(
       color: Colors.indigo,
       child: InkWell(
-        // Area responsive terhadap sentuhan
         onTap: () {
-          // Memunculkan SnackBar ketika diklik
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(SnackBar(
                 content:
                     Text("You have pressed the ${book.fields.title} page!")));
 
-          // Navigator.push(context,
-          //     MaterialPageRoute(builder: (context) => const BookDetailPage()));
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => BookDetailPage(
+                book: book,
+              ),
+            ),
+          );
         },
         child: Container(
           padding: EdgeInsets.zero,
@@ -66,12 +70,13 @@ class BookCard extends StatelessWidget {
                 Expanded(
                   flex: 2,
                   child: Text(
-                    "Rp${bookPrice}",
+                    "Rp$bookPrice",
                     textAlign: TextAlign.center,
                     style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 15.0,
-                        fontWeight: FontWeight.bold),
+                      color: Colors.white,
+                      fontSize: 15.0,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ],

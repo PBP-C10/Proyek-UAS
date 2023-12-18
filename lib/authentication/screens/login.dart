@@ -64,20 +64,19 @@ class _LoginPageState extends State<LoginPage> {
               onPressed: () async {
                 String username = _usernameController.text;
                 String password = _passwordController.text;
-
                 final response = await request.login(
-                    "https://matthew-hotmaraja-c10literatour.stndar.dev/auth/login/",
-                    {
-                      'username': username,
-                      'password': password,
-                    });
-                print('test');
+                    "https://literatour-c10-tk.pbp.cs.ui.ac.id/auth/login/", {
+                  'username': username,
+                  'password': password,
+                });
+
                 if (request.loggedIn) {
                   String message = response['message'];
                   String uname = response['username'];
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => BookfindsPage()),
+                    MaterialPageRoute(
+                        builder: (context) => const BookfindsPage()),
                   );
                   ScaffoldMessenger.of(context)
                     ..hideCurrentSnackBar()

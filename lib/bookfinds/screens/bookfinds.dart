@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:literatour/bookfinds/models/book.dart';
-import 'package:literatour/bookfinds/screens/bookdetails.dart';
 import 'package:literatour/bookfinds/widgets/bookcard.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
@@ -15,17 +14,15 @@ class BookfindsPage extends StatefulWidget {
 class _BookfindsPageState extends State<BookfindsPage> {
   Future<List<Book>> fetchBook() async {
     final request = context.watch<CookieRequest>();
-    final response = await request.get(
-        'https://matthew-hotmaraja-c10literatour.stndar.dev/get-books-flutter/');
-
-    // melakukan konversi data json menjadi object Book
-    List<Book> list_book = [];
+    final response = await request
+        .get('https://literatour-c10-tk.pbp.cs.ui.ac.id/get-books-flutter/');
+    List<Book> listBook = [];
     for (var d in response) {
       if (d != null) {
-        list_book.add(Book.fromJson(d));
+        listBook.add(Book.fromJson(d));
       }
     }
-    return list_book;
+    return listBook;
   }
 
   @override
