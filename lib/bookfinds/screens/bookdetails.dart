@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:literatour/bookfinds/models/book.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:literatour/bookfinds/widgets/startRating.dart';
@@ -75,7 +76,7 @@ class _BookDetailPageState extends State<BookDetailPage> {
                           ),
                         ),
                         Text(
-                          "Rp${widget.book.fields.price / 1000}",
+                          "Rp${NumberFormat('###,###').format(widget.book.fields.price)}",
                           style: GoogleFonts.lato(
                             textStyle: const TextStyle(
                               fontSize: 24,
@@ -96,7 +97,7 @@ class _BookDetailPageState extends State<BookDetailPage> {
                                       .toInt(),
                             ),
                             Text(
-                              " (${widget.book.fields.averageRating}) | ${widget.book.fields.ratingsCount / 1000} ratings",
+                              " (${widget.book.fields.averageRating}) | ${NumberFormat('###,###').format(widget.book.fields.ratingsCount)} ratings",
                               style: GoogleFonts.lato(
                                 textStyle: const TextStyle(
                                   fontSize: 16,
@@ -212,14 +213,6 @@ class _BookDetailPageState extends State<BookDetailPage> {
                                   ),
                                 ),
                                 Text(
-                                  "Average Rating",
-                                  style: GoogleFonts.lato(
-                                    textStyle: const TextStyle(
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                ),
-                                Text(
                                   "Page Count",
                                   style: GoogleFonts.lato(
                                     textStyle: const TextStyle(
@@ -258,12 +251,6 @@ class _BookDetailPageState extends State<BookDetailPage> {
                                   ),
                                 ),
                                 Text(
-                                  widget.book.fields.averageRating.toString(),
-                                  style: GoogleFonts.lato(
-                                    fontSize: 16,
-                                  ),
-                                ),
-                                Text(
                                   widget.book.fields.numPages.toString(),
                                   style: GoogleFonts.lato(
                                     fontSize: 16,
@@ -276,62 +263,74 @@ class _BookDetailPageState extends State<BookDetailPage> {
                       ],
                     ),
                   ),
-                  const Divider(
-                    color: Colors.grey,
-                    thickness: 1,
-                  ),
                 ],
               ),
             ),
           ),
           Container(
-            padding: const EdgeInsets.all(8),
             width: double.infinity,
-            height: 110,
-            decoration: const BoxDecoration(
-              border: Border(
-                top: BorderSide(
-                  color: Colors.black,
-                  width: 0.5,
-                ),
-              ),
-            ),
-            child: Column(
+            height: 75,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(
-                  height: 40,
-                  width: double.infinity, // Set the desired width
+                  height: 50,
+                  width: 185,
                   child: ElevatedButton.icon(
                     onPressed: () {},
                     icon: const Icon(
                       Icons.add_shopping_cart,
+                      color: Colors.white,
                     ),
-                    label: const Text(
+                    label: Text(
                       "Add to Cart",
+                      style: GoogleFonts.lato(
+                        fontSize: 16,
+                        color: Colors.white,
+                      ),
                     ),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.indigo,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        side: const BorderSide(
+                          color: Colors.white,
+                          width: 0.5,
+                        ),
+                      ),
+                      elevation: 15,
                     ),
                   ),
                 ),
                 const Padding(
-                  padding: EdgeInsets.symmetric(
-                    vertical: 5,
-                  ),
+                  padding: EdgeInsets.symmetric(horizontal: 5),
                 ),
                 SizedBox(
-                  height: 40,
-                  width: double.infinity, // Set the desired width
+                  height: 50,
+                  width: 185,
                   child: ElevatedButton.icon(
                     onPressed: () {},
                     icon: const Icon(
                       Icons.bookmark_add,
+                      color: Colors.white,
                     ),
-                    label: const Text(
+                    label: Text(
                       "Add to Wishlist",
+                      style: GoogleFonts.lato(
+                        fontSize: 16,
+                        color: Colors.white,
+                      ),
                     ),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.indigo,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        side: const BorderSide(
+                          color: Colors.white,
+                          width: 0.5,
+                        ),
+                      ),
+                      elevation: 15,
                     ),
                   ),
                 ),
