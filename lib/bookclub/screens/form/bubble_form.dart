@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:literatour/bookclub/models/club.dart';
+import 'package:literatour/bookclub/screens/view/club_detail.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
@@ -19,10 +20,11 @@ class _BubbleFormPageState extends State<BubbleFormPage> {
   Future<bool> postBubble(CookieRequest request) async {
     String clubId = widget.club.pk.toString();
     final response = await request.post(
-        'http://127.0.0.1:8000/book-club/${clubId}/post-bubble-flutter/', {
-      'username': _username,
-      'content': _content,
-    });
+        'https://literatour-c10-tk.pbp.cs.ui.ac.id/book-club/${clubId}/post-bubble-flutter/',
+        {
+          'username': _username,
+          'content': _content,
+        });
 
     return response["status"] == "success";
   }
@@ -41,8 +43,15 @@ class _BubbleFormPageState extends State<BubbleFormPage> {
         actions: [
           IconButton(
             icon: const Icon(Icons.arrow_back),
-            onPressed: () => Navigator.pop(context),
-          ),
+            onPressed: () {
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ClubDetailPage(
+                            club: widget.club,
+                          )));
+            },
+          )
         ],
         backgroundColor: Colors.indigo,
         foregroundColor: Colors.white,
@@ -111,7 +120,12 @@ class _BubbleFormPageState extends State<BubbleFormPage> {
                     if (_formKey.currentState!.validate()) {
                       postBubble(request);
                       _formKey.currentState!.reset();
-                      Navigator.pop(context);
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ClubDetailPage(
+                                    club: widget.club,
+                                  )));
                     }
                   },
                   child: const Text(

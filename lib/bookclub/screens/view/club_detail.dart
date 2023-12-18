@@ -38,8 +38,8 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
   Future<List<Club>> fetchClub(CookieRequest request) async {
     if (!clubIsUpdated) {
       final response = await request.get(
-        // 'https://literatour-c10-tk.pbp.cs.ui.ac.id/book-club/get-club-json/',
-        'http://127.0.0.1:8000/book-club/get-club-flutter/',
+        'https://literatour-c10-tk.pbp.cs.ui.ac.id/book-club/get-club-flutter/',
+        // 'http://127.0.0.1:8000/book-club/get-club-flutter/',
       );
 
       // melakukan konversi data json menjadi object Book
@@ -62,9 +62,9 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
 
   Future<List<Book>> fetchBook(CookieRequest request) async {
     if (!bookIsLoaded) {
-      final response = await request.get(
-          // 'https://literatour-c10-tk.pbp.cs.ui.ac.id/get-books-flutter/'
-          'http://127.0.0.1:8000/get-books-flutter/');
+      final response = await request
+          .get('https://literatour-c10-tk.pbp.cs.ui.ac.id/get-books-flutter/');
+      // 'http://127.0.0.1:8000/get-books-flutter/');
 
       // melakukan konversi data json menjadi object Book
       // try {
@@ -95,8 +95,8 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
   Future<List<Bubble>> fetchBubble(CookieRequest request) async {
     if (!bubbleIsLoaded) {
       String clubId = widget.club.pk.toString();
-      final response = await request
-          .get('http://127.0.0.1:8000/book-club/${clubId}/get-bubble-flutter/');
+      final response = await request.get(
+          'https://literatour-c10-tk.pbp.cs.ui.ac.id/book-club/${clubId}/get-bubble-flutter/');
 
       for (var d in response) {
         if (d != null) {
@@ -116,9 +116,10 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
         : null;
 
     final response = await request.post(
-        'http://127.0.0.1:8000/book-club/${clubId}/add-rec-book-flutter/', {
-      'recommended_books': selectedBookId,
-    });
+        'https://literatour-c10-tk.pbp.cs.ui.ac.id/book-club/${clubId}/add-rec-book-flutter/',
+        {
+          'recommended_books': selectedBookId,
+        });
 
     clubIsUpdated = false;
     await fetchData(request);
@@ -131,7 +132,7 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
     List<Widget> buttons = [];
     buttons.add(ElevatedButton(
         onPressed: () {
-          Navigator.push(
+          Navigator.pushReplacement(
               context,
               MaterialPageRoute(
                   builder: (context) => BubbleFormPage(

@@ -22,9 +22,9 @@ class _BookClubFormPageState extends State<BookClubFormPage> {
 
   Future<List<Book>> fetchBook(CookieRequest request) async {
     if (!isLoaded) {
-      final response = await request.get(
-          // 'https://literatour-c10-tk.pbp.cs.ui.ac.id/get-books-flutter/',
-          'http://127.0.0.1:8000/get-books-flutter/');
+      final response = await request
+          .get('https://literatour-c10-tk.pbp.cs.ui.ac.id/get-books-flutter/');
+      // 'http://127.0.0.1:8000/get-books-flutter/');
 
       // melakukan konversi data json menjadi object Book
       // try {
@@ -57,14 +57,15 @@ class _BookClubFormPageState extends State<BookClubFormPage> {
         ? _bookTitleToIdMap[_selectedBookTitle]
         : null;
 
-    final response = await request
-        .post('http://127.0.0.1:8000/book-club/create-club-flutter/', {
-      'name': _name,
-      'username': 'Club Owner',
-      'description': _description,
-      'recommended_books': selectedBookId,
-      'bubble': _bubble,
-    });
+    final response = await request.post(
+        'https://literatour-c10-tk.pbp.cs.ui.ac.id/book-club/create-club-flutter/',
+        {
+          'name': _name,
+          'username': 'Club Owner',
+          'description': _description,
+          'recommended_books': selectedBookId,
+          'bubble': _bubble,
+        });
 
     return response["status"] == "success";
   }

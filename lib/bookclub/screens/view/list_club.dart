@@ -25,8 +25,8 @@ class _ClubPageState extends State<ClubPage> {
 
   Future<List<Club>> fetchClub(CookieRequest request) async {
     final response = await request.get(
-      // 'https://literatour-c10-tk.pbp.cs.ui.ac.id/book-club/get-club-json/',
-      'http://127.0.0.1:8000/book-club/get-club-flutter/',
+      'https://literatour-c10-tk.pbp.cs.ui.ac.id/book-club/get-club-flutter/',
+      // 'http://127.0.0.1:8000/book-club/get-club-flutter/'
     );
 
     // melakukan konversi data json menjadi object Book
@@ -42,21 +42,24 @@ class _ClubPageState extends State<ClubPage> {
 
   Future<void> deleteClub(CookieRequest request, int clubId) async {
     await request.post(
-        'http://127.0.0.1:8000/book-club/delete-club-flutter/$clubId/', '');
+        'https://literatour-c10-tk.pbp.cs.ui.ac.id/book-club/delete-club-flutter/$clubId/',
+        '');
 
     refreshClubs(request);
   }
 
   Future<void> joinClub(CookieRequest request, int clubId) async {
     await request.post(
-        'http://127.0.0.1:8000/book-club/join-club-flutter/$clubId/', '');
+        'https://literatour-c10-tk.pbp.cs.ui.ac.id/book-club/join-club-flutter/$clubId/',
+        '');
 
     refreshClubs(request);
   }
 
   Future<void> leaveClub(CookieRequest request, int clubId) async {
     await request.post(
-        'http://127.0.0.1:8000/book-club/leave-club-flutter/$clubId/', '');
+        'https://literatour-c10-tk.pbp.cs.ui.ac.id/book-club/leave-club-flutter/$clubId/',
+        '');
 
     refreshClubs(request);
   }
