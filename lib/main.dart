@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:literatour/authentication/screens/login.dart';
+import 'package:literatour/bookclub/screens/menu.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
@@ -24,7 +25,8 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
             useMaterial3: true,
           ),
-          home: LoginApp()),
+          home: LoginApp(),
+      ),
     );
   }
 }

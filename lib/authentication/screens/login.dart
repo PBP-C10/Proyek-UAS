@@ -1,4 +1,6 @@
-import 'package:literatour/bookfinds/screens/bookfinds.dart';
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:literatour/bookclub/screens/menu.dart';
 import 'package:flutter/material.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
@@ -66,18 +68,18 @@ class _LoginPageState extends State<LoginPage> {
                 String password = _passwordController.text;
 
                 final response = await request.login(
-                    "https://matthew-hotmaraja-c10literatour.stndar.dev/auth/login/",
+                    "https://literatour-c10-tk.pbp.cs.ui.ac.id/auth/login/",
                     {
                       'username': username,
                       'password': password,
                     });
-                print('test');
                 if (request.loggedIn) {
                   String message = response['message'];
                   String uname = response['username'];
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => BookfindsPage()),
+                    MaterialPageRoute(builder: (context) => BookClubPage()),
+                    // MaterialPageRoute(builder: (context) => BookfindsPage()),
                   );
                   ScaffoldMessenger.of(context)
                     ..hideCurrentSnackBar()
