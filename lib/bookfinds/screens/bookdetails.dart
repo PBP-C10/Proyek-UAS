@@ -35,11 +35,30 @@ class _BookDetailPageState extends State<BookDetailPage> {
                   Container(
                     padding: const EdgeInsets.all(16),
                     alignment: Alignment.center,
-                    child: Image.network(
-                      widget.book.fields.thumbnail,
-                      width: double.infinity,
-                      height: 430,
-                      fit: BoxFit.fitHeight,
+                    child: Container(
+                      padding: EdgeInsets.zero,
+                      margin: EdgeInsets.zero,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(15),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 5,
+                            blurRadius: 7,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: Image.network(
+                          widget.book.fields.thumbnail,
+                          width: double.infinity,
+                          height: 430,
+                          fit: BoxFit.fill,
+                        ),
+                      ),
                     ),
                   ),
                   Container(
@@ -273,64 +292,96 @@ class _BookDetailPageState extends State<BookDetailPage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(
-                  height: 50,
-                  width: 185,
-                  child: ElevatedButton.icon(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.add_shopping_cart,
-                      color: Colors.white,
-                    ),
-                    label: Text(
-                      "Add to Cart",
-                      style: GoogleFonts.lato(
-                        fontSize: 16,
+                Container(
+                  padding: EdgeInsets.zero,
+                  margin: EdgeInsets.zero,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(15),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 5,
+                        blurRadius: 7,
+                        offset: const Offset(0, 2),
+                      ),
+                    ],
+                  ),
+                  child: SizedBox(
+                    height: 50,
+                    width: 185,
+                    child: ElevatedButton.icon(
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.add_shopping_cart,
                         color: Colors.white,
                       ),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.indigo,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        side: const BorderSide(
+                      label: Text(
+                        "Add to Cart",
+                        style: GoogleFonts.lato(
+                          fontSize: 16,
                           color: Colors.white,
-                          width: 0.5,
                         ),
                       ),
-                      elevation: 15,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.indigo,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          side: const BorderSide(
+                            color: Colors.white,
+                            width: 0.5,
+                          ),
+                        ),
+                        elevation: 10,
+                      ),
                     ),
                   ),
                 ),
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 5),
                 ),
-                SizedBox(
-                  height: 50,
-                  width: 185,
-                  child: ElevatedButton.icon(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.bookmark_add,
-                      color: Colors.white,
-                    ),
-                    label: Text(
-                      "Add to Wishlist",
-                      style: GoogleFonts.lato(
-                        fontSize: 16,
+                Container(
+                  padding: EdgeInsets.zero,
+                  margin: EdgeInsets.zero,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(15),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 5,
+                        blurRadius: 7,
+                        offset: const Offset(0, 2),
+                      ),
+                    ],
+                  ),
+                  child: SizedBox(
+                    height: 50,
+                    width: 185,
+                    child: ElevatedButton.icon(
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.add_shopping_cart,
                         color: Colors.white,
                       ),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.indigo,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        side: const BorderSide(
+                      label: Text(
+                        "Add to Wishlist",
+                        style: GoogleFonts.lato(
+                          fontSize: 16,
                           color: Colors.white,
-                          width: 0.5,
                         ),
                       ),
-                      elevation: 15,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.indigo,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          side: const BorderSide(
+                            color: Colors.white,
+                            width: 0.5,
+                          ),
+                        ),
+                        elevation: 10,
+                      ),
                     ),
                   ),
                 ),

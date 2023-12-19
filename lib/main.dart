@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:literatour/authentication/screens/login.dart';
-import 'package:literatour/bookclub/screens/menu.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
