@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:literatour/booktalk/booktalk_form.dart';
-// import 'package:shopping_list/widgets/left_drawer.dart';
-// import 'package:shopping_list/widgets/shop_card.dart';
+import 'package:literatour/booktalk/screens/booktalk_form.dart';
+import 'package:literatour/booktalk/screens/booktalk_menu.dart';
+import 'package:literatour/booktalk/widgets/booktalk_card.dart';
 
 // that it has a State object (defined below) that contains fields that affect
 class ShopItem {
@@ -15,6 +15,8 @@ class BookTalkPage extends StatelessWidget {
   BookTalkPage({Key? key}) : super(key: key);
   final List<ShopItem> items = [
     ShopItem("Add Review", Icons.checklist),
+    ShopItem("Lihat Review", Icons.reviews),
+    ShopItem("Figma Home", Icons.home_filled),
   ];
 
   @override
@@ -68,56 +70,6 @@ class BookTalkPage extends StatelessWidget {
                 }).toList(),
               ),
             ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class BookTalkCard extends StatelessWidget {
-  final ShopItem item;
-
-  const BookTalkCard(this.item, {super.key}); // Constructor
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: Colors.indigo,
-      child: InkWell(
-        // Area responsive terhadap sentuhan
-        onTap: () {
-          // Memunculkan SnackBar ketika diklik
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(SnackBar(
-                content: Text("Kamu telah menekan tombol ${item.name}!")));
-
-          if (item.name == "Add Review") {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => ReviewFormPage()));
-          }
-        },
-        child: Container(
-          // Container untuk menyimpan Icon dan Text
-          padding: const EdgeInsets.all(8),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  item.icon,
-                  color: Colors.white,
-                  size: 30.0,
-                ),
-                const Padding(padding: EdgeInsets.all(3)),
-                Text(
-                  item.name,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(color: Colors.white),
-                ),
-              ],
-            ),
           ),
         ),
       ),

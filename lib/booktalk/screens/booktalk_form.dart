@@ -9,11 +9,32 @@ class ReviewFormPage extends StatefulWidget {
   State<ReviewFormPage> createState() => _ReviewFormPageState();
 }
 
+class Review {
+  // final String name;
+  final int rating;
+  final String reviewText;
+
+  Review(
+      {
+      //required this.name,
+      required this.rating,
+      required this.reviewText});
+}
+
+class ReviewList {
+  static final List<Review> _reviews = [];
+  static void addReview(Review review) {
+    _reviews.add(review);
+  }
+
+  static List<Review> get reviews => _reviews;
+}
+
 class _ReviewFormPageState extends State<ReviewFormPage> {
   final _formKey = GlobalKey<FormState>();
   // String _name = "";
   int _rating = 0;
-  String _review = "";
+  String _reviewText = "";
 
   @override
   Widget build(BuildContext context) {
@@ -34,29 +55,6 @@ class _ReviewFormPageState extends State<ReviewFormPage> {
         child: SingleChildScrollView(
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          // Padding(
-          //   padding: const EdgeInsets.all(8.0),
-          //   child: TextFormField(
-          //     decoration: InputDecoration(
-          //       hintText: "Nama Produk",
-          //       labelText: "Nama Produk",
-          //       border: OutlineInputBorder(
-          //         borderRadius: BorderRadius.circular(5.0),
-          //       ),
-          //     ),
-          //     onChanged: (String? value) {
-          //       setState(() {
-          //         _name = value!;
-          //       });
-          //     },
-          //     validator: (String? value) {
-          //       if (value == null || value.isEmpty) {
-          //         return "Nama tidak boleh kosong!";
-          //       }
-          //       return null;
-          //     },
-          //   ),
-          // ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
@@ -88,8 +86,8 @@ class _ReviewFormPageState extends State<ReviewFormPage> {
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
               decoration: InputDecoration(
-                hintText: "Review",
-                labelText: "Review",
+                hintText: "Review Text",
+                labelText: "Review Text",
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(5.0),
                 ),
@@ -97,7 +95,7 @@ class _ReviewFormPageState extends State<ReviewFormPage> {
               onChanged: (String? value) {
                 setState(() {
                   // TODO: Tambahkan variabel yang sesuai aman
-                  _review = value!;
+                  _reviewText = value!;
                 });
               },
               validator: (String? value) {
@@ -118,6 +116,10 @@ class _ReviewFormPageState extends State<ReviewFormPage> {
                 ),
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
+                    ReviewList.addReview(Review(
+                      rating: _rating,
+                      reviewText: _reviewText,
+                    ));
                     showDialog(
                       context: context,
                       builder: (context) {
@@ -130,7 +132,7 @@ class _ReviewFormPageState extends State<ReviewFormPage> {
                                 // Text('Nama: $_name'),
                                 // TODO: Munculkan value-value lainnya
                                 Text('Rating: $_rating'),
-                                Text('Review: $_review')
+                                Text('Review: $_reviewText')
                               ],
                             ),
                           ),
