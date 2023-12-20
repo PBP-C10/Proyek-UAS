@@ -19,7 +19,7 @@ class LeftDrawer extends StatelessWidget {
           child: Column(
             children: [
               Text(
-                'Archive Of Ours',
+                'My Library',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 30,
