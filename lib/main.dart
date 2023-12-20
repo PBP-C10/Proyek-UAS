@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:literatour/authentication/screens/login.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
+import 'package:literatour/bookfinds/screens/bookfinds.dart';
+import 'package:literatour/booktalk/screens/booktalk_menu.dart';
 
 void main() {
   runApp(const MyApp());

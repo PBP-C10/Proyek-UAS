@@ -22,7 +22,6 @@ class _BookShopPageState extends State<BookShopPage> {
   Future<List<Book>> fetchProduct(CookieRequest request) async {
     final response = await request.get(
         'https://literatour-c10-tk.pbp.cs.ui.ac.id/BookShop/get-carts-flutter/');
-
     for (var d in response) {
       if (d != null) {
         list_book.add(Book.fromJson(d));

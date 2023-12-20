@@ -1,8 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:intl/intl.dart';
 import 'package:literatour/bookfinds/models/book.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:literatour/bookfinds/widgets/startRating.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 
 class BookDetailPage extends StatefulWidget {
   final Book book;
@@ -13,8 +18,10 @@ class BookDetailPage extends StatefulWidget {
 }
 
 class _BookDetailPageState extends State<BookDetailPage> {
+  bool isButtonEnabled = true;
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -317,7 +324,25 @@ class _BookDetailPageState extends State<BookDetailPage> {
                     height: 50,
                     width: 185,
                     child: ElevatedButton.icon(
-                      onPressed: () {},
+                      onPressed: isButtonEnabled
+                          ? () async {
+                              final response = await request.postJson(
+                                'https://literatour-c10-tk.pbp.cs.ui.ac.id/BookShop/add-book-to-cart/',
+                                jsonEncode(
+                                  <String, String>{
+                                    'book_id': widget.book.pk.toString(),
+                                  },
+                                ),
+                              );
+
+                              if (response['status'] == 'success' ||
+                                  response['status'] == 'fail') {
+                                setState(() {
+                                  isButtonEnabled = false;
+                                });
+                              }
+                            }
+                          : null,
                       icon: const Icon(
                         Icons.add_shopping_cart,
                         color: Colors.white,
