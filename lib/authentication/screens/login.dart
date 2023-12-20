@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:literatour/bookfinds/screens/bookfinds.dart';
+import 'package:literatour/bookshop/screens/bookshop.dart';
 import 'package:literatour/literatour/widgets/screens/literatour.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
@@ -74,8 +76,7 @@ class _LoginPageState extends State<LoginPage> {
                   String uname = response['username'];
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) => const LiteratourPage()),
+                    MaterialPageRoute(builder: (context) => BookShopPage()),
                   );
                   ScaffoldMessenger.of(context)
                     ..hideCurrentSnackBar()
