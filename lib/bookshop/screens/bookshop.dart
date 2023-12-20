@@ -20,8 +20,8 @@ class _BookShopPageState extends State<BookShopPage> {
   int totalPrice = 0;
 
   Future<List<Book>> fetchProduct(CookieRequest request) async {
-    final response =
-        await request.get('http://127.0.0.1:8000/BookShop/get-carts-flutter/');
+    final response = await request.get(
+        'https://literatour-c10-tk.pbp.cs.ui.ac.id/BookShop/get-carts-flutter/');
 
     for (var d in response) {
       if (d != null) {
