@@ -16,12 +16,6 @@ class BookCard extends StatelessWidget {
       color: Colors.white,
       child: InkWell(
         onTap: () {
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(SnackBar(
-                content:
-                    Text("You have pressed the ${book.fields.title} page!")));
-
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -59,6 +53,12 @@ class BookCard extends StatelessWidget {
                       width: 200,
                       height: 250,
                       fit: BoxFit.fill,
+                      errorBuilder: ((context, error, stackTrace) {
+                        return Image.network(
+                          "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png",
+                          width: 64,
+                        );
+                      }),
                     ),
                   ),
                 ),

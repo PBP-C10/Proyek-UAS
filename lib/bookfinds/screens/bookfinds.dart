@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:literatour/bookfinds/models/book.dart';
+import 'package:literatour/bookfinds/screens/bookrequest.dart';
 import 'package:literatour/bookfinds/widgets/bookcard.dart';
+import 'package:literatour/bookshop/screens/bookshop.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
@@ -38,6 +40,41 @@ class _BookfindsPageState extends State<BookfindsPage> {
             ),
           ),
         ),
+        backgroundColor: Colors.indigo,
+        foregroundColor: Colors.white,
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const BookRequestPage(),
+                ),
+              );
+            },
+            child: Text(
+              "Request\nBook",
+              textAlign: TextAlign.center,
+              style: GoogleFonts.lato(
+                textStyle: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const BookShopPage(),
+                ),
+              );
+            },
+            icon: const Icon(Icons.shopping_cart),
+          )
+        ],
       ),
       body: FutureBuilder(
         future: fetchBook(),
