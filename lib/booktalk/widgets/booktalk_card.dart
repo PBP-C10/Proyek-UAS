@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:literatour/booktalk/screens/booktalk_form.dart';
+import 'package:literatour/booktalk/screens/booktalk_listReview.dart';
 import 'package:literatour/booktalk/screens/booktalk_menu.dart';
 import 'package:literatour/booktalk/screens/booktalk_daftarReview.dart';
 import 'package:literatour/booktalk/screens/booktalk_home_figma.dart';
@@ -32,13 +33,18 @@ class BookTalkCard extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => ReviewListPage()));
           }
 
-          if (item.name == "Figma Home") {
+          // if (item.name == "Figma Home") {
+          //   Navigator.push(
+          //       context,
+          //       MaterialPageRoute(
+          //           builder: (context) => FigmaHomePage(
+          //                 title: 'judul buku',
+          //               )));
+          // }
+
+          if (item.name == "List Review Fetch") {
             Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => FigmaHomePage(
-                          title: 'judul buku',
-                        )));
+                context, MaterialPageRoute(builder: (context) => ReviewPage()));
           }
         },
         child: Container(

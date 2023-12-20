@@ -23,21 +23,35 @@ class ReviewListPage extends StatelessWidget {
             // Wrap each item in a Card for better styling
             margin: const EdgeInsets.all(8.0),
             child: ListTile(
-              title: Text(
-                review.reviewText,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors
-                      .indigo, // Use a color scheme similar to your form page
-                ),
+              title: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Buku yang direview: ${review.selectedBookTitle ?? "Not specified"}',
+                    style: TextStyle(
+                      color: Colors.indigo,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(height: 8.0), // Adjust the spacing as needed
+                  Text(
+                    'Komentar: ${review.reviewText} ',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.indigo,
+                    ),
+                  ),
+                ],
               ),
-              subtitle: Text(
-                'Rating: ${review.rating}',
-                style: TextStyle(
-                    color: Colors.black54), // Subdued color for the subtitle
+              subtitle: Row(
+                children: List.generate(5, (index) {
+                  return Icon(
+                    index < review.rating ? Icons.star : Icons.star_border,
+                    color: Colors.amber,
+                  );
+                }),
               ),
-              isThreeLine:
-                  true, // If you want to have space for an additional line of text
+              isThreeLine: true,
               contentPadding: const EdgeInsets.symmetric(
                 vertical: 8.0,
                 horizontal: 16.0,
@@ -48,16 +62,6 @@ class ReviewListPage extends StatelessWidget {
         },
       ),
       // You might want to include a floating action button for adding new items
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const ReviewFormPage()),
-          );
-        },
-        backgroundColor: Colors.indigo,
-        child: const Icon(Icons.add, color: Colors.white),
-      ),
     );
   }
 }

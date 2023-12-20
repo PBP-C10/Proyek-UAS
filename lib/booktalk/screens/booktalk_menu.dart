@@ -16,7 +16,8 @@ class BookTalkPage extends StatelessWidget {
   final List<ShopItem> items = [
     ShopItem("Add Review", Icons.checklist),
     ShopItem("Lihat Review", Icons.reviews),
-    ShopItem("Figma Home", Icons.home_filled),
+    // ShopItem("Figma Home", Icons.home_filled),
+    ShopItem("List Review Fetch", Icons.list_alt),
   ];
 
   @override
