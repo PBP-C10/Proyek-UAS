@@ -106,13 +106,7 @@ class _BookRequestPageState extends State<BookRequestPage> {
                               elevation: MaterialStateProperty.all(8.0),
                             ),
                             onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      const BookRequestFormPage(),
-                                ),
-                              );
+                              _navigateToFormPage();
                             },
                             child: Text(
                               "Request a Book",
