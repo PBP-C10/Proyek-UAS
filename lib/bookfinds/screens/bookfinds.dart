@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:literatour/bookfinds/models/book.dart';
+import 'package:literatour/bookfinds/screens/bookrequest.dart';
 import 'package:literatour/bookfinds/widgets/bookcard.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
@@ -15,8 +16,8 @@ class BookfindsPage extends StatefulWidget {
 class _BookfindsPageState extends State<BookfindsPage> {
   Future<List<Book>> fetchBook() async {
     final request = context.watch<CookieRequest>();
-    final response = await request
-        .get('https://literatour-c10-tk.pbp.cs.ui.ac.id/get-books-flutter/');
+    final response =
+        await request.get('http://10.0.2.2:8000/get-books-flutter/');
     List<Book> listBook = [];
     for (var d in response) {
       if (d != null) {
@@ -38,6 +39,34 @@ class _BookfindsPageState extends State<BookfindsPage> {
             ),
           ),
         ),
+        backgroundColor: Colors.indigo,
+        foregroundColor: Colors.white,
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const BookRequestPage(),
+                ),
+              );
+            },
+            child: Text(
+              "Request\nBook",
+              textAlign: TextAlign.center,
+              style: GoogleFonts.lato(
+                textStyle: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.shopping_cart),
+          )
+        ],
       ),
       body: FutureBuilder(
         future: fetchBook(),

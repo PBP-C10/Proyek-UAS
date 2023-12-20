@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:literatour/literatour/widgets/screens/literatour.dart';
+import 'package:literatour/literatour/screens/literatour.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
@@ -64,8 +64,8 @@ class _LoginPageState extends State<LoginPage> {
               onPressed: () async {
                 String username = _usernameController.text;
                 String password = _passwordController.text;
-                final response = await request.login(
-                    "https://literatour-c10-tk.pbp.cs.ui.ac.id/auth/login/", {
+                final response =
+                    await request.login("http://10.0.2.2:8000/auth/login/", {
                   'username': username,
                   'password': password,
                 });
@@ -75,7 +75,8 @@ class _LoginPageState extends State<LoginPage> {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const LiteratourPage()),
+                      builder: (context) => const LiteratourPage(),
+                    ),
                   );
                   ScaffoldMessenger.of(context)
                     ..hideCurrentSnackBar()
