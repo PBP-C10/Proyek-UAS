@@ -26,11 +26,7 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
             useMaterial3: true,
           ),
-<<<<<<< HEAD
-          home: BookTalkPage()),
-=======
           home: const LoginApp()),
->>>>>>> fcf67b318d366e9adf0f59dfae0d4544bb92943f
     );
   }
 }
