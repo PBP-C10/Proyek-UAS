@@ -123,6 +123,7 @@ final categoryValues = EnumValues({
 enum Model { BOOKFINDS_BOOK }
 
 final modelValues = EnumValues({"bookfinds.book": Model.BOOKFINDS_BOOK});
+//coment biar beda
 
 class EnumValues<T> {
   Map<String, T> map;
