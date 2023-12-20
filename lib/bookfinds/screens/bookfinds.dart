@@ -15,8 +15,8 @@ class BookfindsPage extends StatefulWidget {
 class _BookfindsPageState extends State<BookfindsPage> {
   Future<List<Book>> fetchBook() async {
     final request = context.watch<CookieRequest>();
-    final response = await request.get(
-        'https://matthew-hotmaraja-c10literatour.stndar.dev/get-books-flutter/');
+    final response =
+        await request.get('http://127.0.0.1:8000/bookfinds/get-books-flutter/');
 
     // melakukan konversi data json menjadi object Book
     List<Book> list_book = [];

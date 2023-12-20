@@ -1,9 +1,15 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
 
-const List<String> list = <String>['Dropdown', 'Transfer Bank', 'Gopay', 'OVO'];
+import 'package:flutter/material.dart';
+import 'package:literatour/bookshop/screens/bookshop.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
+
+const List<String> list = <String>['Transfer Bank', 'Gopay', 'OVO'];
 
 class CartFormPage extends StatefulWidget {
-  const CartFormPage({super.key});
+  const CartFormPage({Key? key}) : super(key: key);
 
   @override
   State<CartFormPage> createState() => _ShopFormPageState();
@@ -14,17 +20,97 @@ class _ShopFormPageState extends State<CartFormPage> {
   String _email = "";
   String _paymentMethod = list.first;
 
+  Future<void> _showPaymentInfoDialog() async {
+    String message = "";
+
+    switch (_paymentMethod) {
+      case 'Gopay':
+        message = "Transfer ke 0002-08979878397 a/n Literatour";
+        break;
+      case 'OVO':
+        message = "Transfer ke 1818085683730384 a/n Literatour";
+        break;
+      case 'Transfer Bank':
+        message = "Transfer ke bank ABC dengan kode 00298734765 a/n Literatour";
+        break;
+      default:
+        message = "Informasi pembayaran tidak tersedia";
+    }
+
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Informasi Pembayaran'),
+          content: Text(message),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                submitOrder(context);
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<void> submitOrder(BuildContext context) async {
+    try {
+      final request = context.read<CookieRequest>();
+      final response = await request.post(
+        'https://literatour-c10-tk.pbp.cs.ui.ac.id/BookShop/submit-order-flutter/',
+        '',
+      );
+
+      if (response is Map<String, dynamic> &&
+          response.containsKey('status') &&
+          response['status'] == 'success') {
+        print('Order submitted successfully');
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => BookShopPage()),
+        );
+      } else {
+        print('Failed to submit order. Response: $response');
+      }
+    } catch (e) {
+      print('Error submitting order: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Center(
           child: Text(
-            'Form Tambah Produk',
+            'Order Confirmation Form',
           ),
         ),
         backgroundColor: Colors.indigo,
         foregroundColor: Colors.white,
+        actions: [
+          TextButton(
+            onPressed: () {
+              if (_formKey.currentState!.validate()) {
+                _showPaymentInfoDialog();
+              }
+            },
+            style: TextButton.styleFrom(
+              backgroundColor: Colors.white, // Warna latar belakang tombol
+            ),
+            child: Text(
+              'Confirm Order',
+              style: TextStyle(
+                color: Colors.indigo,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ],
       ),
       body: Form(
         key: _formKey,
@@ -36,8 +122,8 @@ class _ShopFormPageState extends State<CartFormPage> {
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
                   decoration: InputDecoration(
-                    hintText: "Nama Produk",
-                    labelText: "Nama Produk",
+                    hintText: "Email",
+                    labelText: "Email",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5.0),
                     ),
@@ -49,7 +135,7 @@ class _ShopFormPageState extends State<CartFormPage> {
                   },
                   validator: (String? value) {
                     if (value == null || value.isEmpty) {
-                      return "Nama Produk tidak boleh kosong!";
+                      return "Email tidak boleh kosong!";
                     }
                     return null;
                   },
@@ -86,23 +172,6 @@ class _ShopFormPageState extends State<CartFormPage> {
                 ),
               ),
             ],
-          ),
-        ),
-      ),
-      // Tombol "Confirm Order"
-      bottomNavigationBar: BottomAppBar(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: ElevatedButton(
-            onPressed: () {
-              // Tambahkan logika untuk mengonfirmasi order di sini
-              if (_formKey.currentState!.validate()) {
-                // Lakukan aksi setelah konfirmasi order
-                // Contoh: Navigator.push, showDialog, dsb.
-                print("Order confirmed!");
-              }
-            },
-            child: Text("Confirm Order"),
           ),
         ),
       ),

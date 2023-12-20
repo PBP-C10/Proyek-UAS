@@ -1,58 +1,86 @@
 import 'package:flutter/material.dart';
-import 'package:literatour/bookshop/screens/shoplist_form.dart';
+import 'package:literatour/bookfinds/models/book.dart';
 
-class BookDetails {
-  final String name;
-  final IconData icon;
+class BookDetails extends StatelessWidget {
+  final Book book;
+  final String bookPrice;
+  final VoidCallback onDeletePressed;
 
-  BookDetails(this.name, this.icon);
-}
-
-class ShopCard extends StatelessWidget {
-  final BookDetails item;
-
-  const ShopCard(this.item, {super.key}); // Constructor
+  const BookDetails(this.book, this.bookPrice,
+      {Key? key, required this.onDeletePressed})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Material(
       color: Colors.indigo,
-      child: InkWell(
-        // Area responsive terhadap sentuhan
-        onTap: () {
-          // Memunculkan SnackBar ketika diklik
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(SnackBar(
-                content: Text("Kamu telah menekan tombol ${item.name}!")));
-          if (item.name == "Tambah Produk") {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => CartFormPage(),
-                ));
-          }
-        },
-        child: Container(
-          // Container untuk menyimpan Icon dan Text
-          padding: const EdgeInsets.all(8),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  item.icon,
-                  color: Colors.white,
-                  size: 30.0,
+      child: Container(
+        padding: EdgeInsets.zero,
+        margin: EdgeInsets.zero,
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                flex: 10,
+                child: Image(
+                  image: NetworkImage(book.fields.thumbnail),
                 ),
-                const Padding(padding: EdgeInsets.all(3)),
-                Text(
-                  item.name,
+              ),
+              Expanded(
+                flex: 1,
+                child: Text(
+                  book.fields.title,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(color: Colors.white),
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 15.0,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ],
-            ),
+              ),
+              Expanded(
+                flex: 1,
+                child: Text(
+                  book.fields.author,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    color: Colors.grey,
+                    fontSize: 10.0,
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 2,
+                child: Text(
+                  "Rp$bookPrice",
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 15.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              // Delete button
+              // Delete button
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.red,
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                padding: const EdgeInsets.all(8.0),
+                child: IconButton(
+                  icon: Icon(Icons.delete, color: Colors.white),
+                  onPressed: () {
+                    // Tambahkan print statement untuk memeriksa apakah fungsi terpanggil
+                    print('Delete button pressed');
+                    onDeletePressed();
+                  },
+                ),
+              ),
+            ],
           ),
         ),
       ),

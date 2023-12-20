@@ -13,8 +13,8 @@ class BookDetailPage extends StatefulWidget {
 class _ProductPageState extends State<BookDetailPage> {
   Future<List<Book>> fetchProduct() async {
     final request = context.watch<CookieRequest>();
-    final response = await request
-        .get('https://literatour-c10-tk.pbp.cs.ui.ac.id/get-books-flutter/');
+    final response = await request.get(
+        'https://literatour-c10-tk.pbp.cs.ui.ac.id/BookShop/get-books-flutter/');
 
     // melakukan konversi data json menjadi object Book
     List<Book> list_book = [];
