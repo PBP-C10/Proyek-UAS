@@ -16,8 +16,8 @@ class BookRequestPage extends StatefulWidget {
 class _BookRequestPageState extends State<BookRequestPage> {
   Future<List<BookRequest>> fetchBookRequest() async {
     final request = context.watch<CookieRequest>();
-    final response =
-        await request.get('http://10.0.2.2:8000/get-book-requests/');
+    final response = await request
+        .get('https://literatour-c10-tk.pbp.cs.ui.ac.id/get-book-requests/');
     List<BookRequest> listBookRequest = [];
     for (var d in response) {
       if (d != null) {

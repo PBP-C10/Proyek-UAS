@@ -16,12 +16,6 @@ class BookCard extends StatelessWidget {
       color: Colors.white,
       child: InkWell(
         onTap: () {
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(SnackBar(
-                content:
-                    Text("You have pressed the ${book.fields.title} page!")));
-
           Navigator.push(
             context,
             MaterialPageRoute(

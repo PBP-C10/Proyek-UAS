@@ -118,7 +118,7 @@ class _BookRequestFormPageState extends State<BookRequestFormPage> {
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
                       final response = await request.postJson(
-                          "http://10.0.2.2:8000/request-book-flutter/",
+                          "https://literatour-c10-tk.pbp.cs.ui.ac.id/request-book-flutter/",
                           jsonEncode(<String, String>{
                             'title': _title,
                             'author': _author,
