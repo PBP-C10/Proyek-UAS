@@ -4,6 +4,8 @@
 
 [![Build status](https://build.appcenter.ms/v0.1/apps/d37f5096-0b72-41ee-a08a-4c8d243d178c/branches/main/badge)](https://appcenter.ms)
 
+Link Aplikasi: https://appcenter-filemanagement-distrib4ede6f06e.azureedge.net/14b75276-bb09-406d-b42d-e3cefac61981/app-release.apk?sv=2019-02-02&sr=c&sig=0d94B15Xu9Pc9oxcovOh2mIbuWwCQPDthNs8jE1a7MQ%3D&se=2023-12-23T02%3A04%3A34Z&sp=r
+
 ## Pengembang Aplikasi
 
 > Proyek ini dibuat oleh kelompok C10 dengan anggota sebagai berikut:
@@ -99,6 +101,7 @@ LiteraTour memiliki fitur-fitur yang dapat memudahkan pengguna dalam membeli buk
 ## Role
 
 Hanya ada satu role pengguna di aplikasi mobile LiteraTour, yaitu User (Authorized) dengan kemampuan sebagai berikut.
+
 - Mengunjungi dan melakukan aksi pada Sign In & Sign Up page
 - Mengunjungi dan melakukan aksi pada Book Finds page
 - Mengunjungi dan melakukan aksi pada Book Shop page
